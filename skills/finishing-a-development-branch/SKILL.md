@@ -131,7 +131,23 @@ git checkout <base-branch>
 git branch -D <feature-branch>
 ```
 
-Then: Cleanup worktree (Step 5)
+Then: Archive artifacts (Step 4.5), Cleanup worktree (Step 5)
+
+### Step 4.5: Archive Artifacts (Options 1 & 2)
+
+After successful merge or PR creation, archive the change folder:
+
+1. Check if a change folder exists for this branch:
+   - `docs/spsa/changes/<feature-name>/`
+
+2. If found, move to dated archive:
+   ```bash
+   mv docs/spsa/changes/<feature-name> docs/spsa/archive/YYYY-MM-DD-<feature-name>
+   ```
+
+3. Commit the archive move.
+
+4. If no matching change folder found, skip silently.
 
 ### Step 5: Cleanup Worktree
 
@@ -151,12 +167,12 @@ git worktree remove <worktree-path>
 
 ## Quick Reference
 
-| Option | Merge | Push | Keep Worktree | Cleanup Branch |
-|--------|-------|------|---------------|----------------|
-| 1. Merge locally | ✓ | - | - | ✓ |
-| 2. Create PR | - | ✓ | ✓ | - |
-| 3. Keep as-is | - | - | ✓ | - |
-| 4. Discard | - | - | - | ✓ (force) |
+| Option | Merge | Push | Archive | Keep Worktree | Cleanup Branch |
+|--------|-------|------|---------|---------------|----------------|
+| 1. Merge locally | ✓ | - | ✓ | - | ✓ |
+| 2. Create PR | - | ✓ | ✓ | ✓ | - |
+| 3. Keep as-is | - | - | - | ✓ | - |
+| 4. Discard | - | - | - | - | ✓ (force) |
 
 ## Common Mistakes
 

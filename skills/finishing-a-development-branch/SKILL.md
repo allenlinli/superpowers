@@ -91,12 +91,16 @@ Then: Cleanup worktree (Step 5)
 ```bash
 # Detect remote (first git remote, or user-configured)
 REMOTE=$(git remote | head -1)
+if [ -z "$REMOTE" ]; then
+  echo "No git remote configured. Add one with: git remote add <name> <url>"
+  exit 1
+fi
 
 # Push branch
-git push -u $REMOTE <feature-branch>
+git push -u "$REMOTE" <feature-branch>
 
 # Detect forge type from remote URL
-REMOTE_URL=$(git remote get-url $REMOTE)
+REMOTE_URL=$(git remote get-url "$REMOTE")
 ```
 
 **If GitHub** (`github.com` in URL):

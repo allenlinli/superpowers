@@ -89,10 +89,18 @@ Then: Cleanup worktree (Step 5)
 #### Option 2: Push and Create PR
 
 ```bash
-# Push branch
-git push -u origin <feature-branch>
+# Detect remote (first git remote, or user-configured)
+REMOTE=$(git remote | head -1)
 
-# Create PR
+# Push branch
+git push -u $REMOTE <feature-branch>
+
+# Detect forge type from remote URL
+REMOTE_URL=$(git remote get-url $REMOTE)
+```
+
+**If GitHub** (`github.com` in URL):
+```bash
 gh pr create --title "<title>" --body "$(cat <<'EOF'
 ## Summary
 <2-3 bullets of what changed>
@@ -101,6 +109,24 @@ gh pr create --title "<title>" --body "$(cat <<'EOF'
 - [ ] <verification steps>
 EOF
 )"
+```
+
+**If GitLab** (`gitlab` in URL):
+```bash
+glab mr create --title "<title>" --description "$(cat <<'EOF'
+## Summary
+<2-3 bullets of what changed>
+
+## Test Plan
+- [ ] <verification steps>
+EOF
+)"
+```
+
+**If Forgejo/Gitea** (other self-hosted):
+```
+# Push completed. Create PR manually at:
+# <remote-url>/compare/<base-branch>...<feature-branch>
 ```
 
 Then: Cleanup worktree (Step 5)

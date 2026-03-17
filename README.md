@@ -24,6 +24,12 @@ Thanks!
 - Jesse
 
 
+## Install This Fork
+
+```bash
+claude plugin add --transport github allenlinli/superpowers
+```
+
 ## Installation
 
 **Note:** Installation differs by platform. Claude Code or Cursor have built-in plugin marketplaces. Codex and OpenCode require manual setup.
@@ -176,5 +182,4 @@ MIT License - see LICENSE file for details
 
 ## Support
 
-- **Issues**: https://github.com/obra/superpowers/issues
-- **Marketplace**: https://github.com/obra/superpowers-marketplace
+- **Issues**: https://github.com/allenlinli/superpowers/issues
